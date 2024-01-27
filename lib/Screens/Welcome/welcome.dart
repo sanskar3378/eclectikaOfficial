@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:eclectika23_official_app/CustomWidgets/screen_background.dart';
 import 'package:eclectika23_official_app/Screens/Welcome/network.dart';
 import 'package:flutter/material.dart';
@@ -15,11 +14,21 @@ class Welcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
+    final height = MediaQuery.of(context).size.height - 11;
 
     List<Widget> listBanners = [
-      customBanner(imagePath: '${S.carousel}1.png', text: '${S.text1[0]}', height: height, width: width),
-      customBanner(imagePath: '${S.carousel}2.png', text: '${S.text1[1]}', height: height, width: width),
+      customBanner(
+          imagePath: 'asset/welcomeCarousel/ironman.jpg',
+          bgPath: 'asset/welcomeCarousel/welcome1.jpg',
+          text: '${S.text1[0]}',
+          height: height,
+          width: width),
+      customBanner(
+          imagePath: 'asset/welcomeCarousel/captain america.jpg',
+          bgPath: 'asset/welcomeCarousel/background.png',
+          text: '${S.text1[1]}',
+          height: height,
+          width: width),
     ];
 
     return Scaffold(
@@ -29,8 +38,7 @@ class Welcome extends StatelessWidget {
             const ScreenBackground(),
             InitialPage(height: height, listBanners: listBanners),
           ],
-        )
-    );
+        ));
   }
 }
 
@@ -50,7 +58,7 @@ class InitialPage extends StatefulWidget {
 
 class _InitialPageState extends State<InitialPage> {
   final PageController _pageController = PageController(initialPage: 0);
-  int current =0;
+  int current = 0;
 
   @override
   void dispose() {
@@ -62,22 +70,23 @@ class _InitialPageState extends State<InitialPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        margin: EdgeInsets.all(5),
+        margin: const EdgeInsets.all(5),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 5.0,),
+            const SizedBox(height: 5.0),
             Center(
-              child: Text("ECLECTIKA'23",
-                style: GoogleFonts.bebasNeue(fontSize: 64,color: C.buttonColor),
+              child: Text(
+                "ECLECTIKA'23",
+                style: GoogleFonts.bebasNeue(fontSize: 64, color: Colors.white),
               ),
             ),
-            SizedBox(height: 5.0,),
+            const SizedBox(height: 0),
             SizedBox(
-              height: widget.height*0.73,
+              height: widget.height * 0.72,
               child: PageView(
-                onPageChanged: (int index){
+                onPageChanged: (int index) {
                   current = index;
                 },
                 physics: const NeverScrollableScrollPhysics(),
@@ -85,11 +94,15 @@ class _InitialPageState extends State<InitialPage> {
                 children: widget.listBanners,
               ),
             ),
+            const SizedBox(height: 5),
             //Bottom buttons
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CustomButton(title: "Skip", fillColor: C.backgroundColor,
-                  borderColor: C.buttonColor,
+                CustomButton(
+                  title: "Skip",
+                  fillColor: const Color.fromARGB(255, 139, 7, 6),
+                  borderColor: Colors.white,
                   onClick: () {
                     Navigator.push(
                       context,
@@ -97,8 +110,10 @@ class _InitialPageState extends State<InitialPage> {
                     );
                   },
                 ),
-                CustomButton(title: "Next", fillColor: C.backgroundColor,
-                  borderColor: C.buttonColor,
+                CustomButton(
+                  title: "Next",
+                  fillColor: const Color.fromARGB(255, 0, 46, 94),
+                  borderColor: Colors.white,
                   onClick: () {
                     if (_pageController.hasClients) {
                       _pageController.nextPage(
@@ -106,7 +121,7 @@ class _InitialPageState extends State<InitialPage> {
                         curve: Curves.easeInOut,
                       );
                     }
-                    if(current>=1){
+                    if (current >= 1) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => FinalPage()),
@@ -123,12 +138,9 @@ class _InitialPageState extends State<InitialPage> {
   }
 }
 
-
-
 class FinalPage extends StatelessWidget {
   FinalPage({Key? key}) : super(key: key);
   SkipLogin skipLogin = SkipLogin();
-
 
   @override
   Widget build(BuildContext context) {
@@ -136,59 +148,90 @@ class FinalPage extends StatelessWidget {
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          const ScreenBackground(),
+          // const ScreenBackground(),
+          Image.asset(
+            'asset/welcomeCarousel/finalPage_image0.jpg',
+            height: MediaQuery.of(context).size.height,
+            fit: BoxFit.cover,
+          ),
           SafeArea(
-              child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 15.0,),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(15.0),
-                  child: Image.asset('${S.carousel}5.png',fit: BoxFit.cover,),
+                const SizedBox(
+                  height: 15.0,
                 ),
-                const SizedBox(height: 15.0,),
-                Text("ECLECTIKA", style: GoogleFonts.sen(fontSize: 38.0,color: C.primaryColor, fontWeight: FontWeight.bold)),
-                Center(child: Text("The Cultural Event at NIT Raipur", style: GoogleFonts.sen(fontSize: 20.0,color: Colors.white))),
-                const SizedBox(height: 25.0,),
-                Center(child: Text("---Register to Continue---", style: GoogleFonts.sen(fontSize: 18.0,color: Colors.white))),
-                const SizedBox(height: 5.0,),
+                // ClipRRect(
+                //   borderRadius: BorderRadius.circular(15.0),
+                //   child: Image.asset(
+                //     'asset/welcomeCarousel/ironman.jpg',
+                //     fit: BoxFit.cover,
+                //   ),
+                // ),
+                const SizedBox(
+                  height: 15.0,
+                ),
+                Text("ECLECTIKA",
+                    style: GoogleFonts.titanOne(
+                        fontSize: 50.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.normal)),
+                Center(
+                  child: Text(
+                    "The Cultural Event at NIT Raipur",
+                    style: GoogleFonts.sen(
+                      fontSize: 20.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 25.0,
+                ),
+                Center(
+                    child: Text("---Register to Continue---",
+                        style: GoogleFonts.alata(
+                            fontSize: 20.0, color: Colors.white))),
+                const SizedBox(
+                  height: 5.0,
+                ),
                 Row(
                   children: [
-                    FormButton1(title: 'Signup',
-                        fillColor: C.backgroundColor,
-                        borderColor: C.buttonColor,
-                        onClick: (){
-                          Navigator.pushReplacementNamed(context, S.routeSignup);
-                        }
-                    ),
-                    FormButton1(title: 'Login',
-                        fillColor: C.backgroundColor,
-                        borderColor: C.buttonColor,
-                        onClick: (){
+                    FormButton1(
+                        title: 'Signup',
+                        fillColor: Colors.red[700]!,
+                        borderColor: Colors.yellow,
+                        onClick: () {
+                          Navigator.pushReplacementNamed(
+                              context, S.routeSignup);
+                        }),
+                    FormButton1(
+                        title: 'Login',
+                        fillColor: Colors.blue[800]!,
+                        borderColor: Colors.white,
+                        onClick: () {
                           Navigator.pushReplacementNamed(context, S.routeLogin);
-                        }
-                    ),
+                        }),
                   ],
                 ),
-                FormButton(title: 'Continue as Guest',
-                    fillColor: C.backgroundColor,
-                    borderColor: C.buttonColor,
-                    onClick: () async {
-                      await skipLogin.welcome(emailAddress: "dinosaur@eclectika.com", password: "dinosaur2023");
-                      Navigator.pushReplacementNamed(context, S.routeSplash);
-                    }
+                FormButton(
+                  isGradient: true,
+                  title: 'Continue as Guest',
+                  fillColor: Colors.greenAccent[400]!,
+                  borderColor: Colors.white,
+                  onClick: () async {
+                    await skipLogin.welcome(
+                        emailAddress: "dinosaur@eclectika.com",
+                        password: "dinosaur2023");
+                    Navigator.pushReplacementNamed(context, S.routeSplash);
+                  },
                 ),
               ],
-            )
+            ),
           ),
         ],
       ),
     );
   }
 }
-
-
-
-
-
-

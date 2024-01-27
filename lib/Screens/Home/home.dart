@@ -54,39 +54,53 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-    return Scaffold(
-      body: BlocConsumer<HomeCubit, HomeState>(listener: (context, state) {
-        if (state is HomeError) {
-          print('oh no');
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(
-              state.message,
-              style: const TextStyle(color: C.gradientColor3),
-            ),
-            backgroundColor: C.fieldColor,
-          ));
-        }
-        if (state is HomeSuccess) {
-          print('fuck');
-          userProfile = state.userProfile;
-        }
-      }, builder: (context, state) {
-        return Stack(
-          children: [
-            const ScreenBackground(),
-            if (state is HomeLoading)
-              _buildLoading(context)
-            else
-              _buildSuccess(context, width, height),
-          ],
-        );
-      }),
+    return Container(
+      color: Colors.transparent,
+      child: Scaffold(
+        backgroundColor: Colors.indigo,
+        body: BlocConsumer<HomeCubit, HomeState>(listener: (context, state) {
+          if (state is HomeError) {
+            print('oh no');
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text(
+                state.message,
+                style: const TextStyle(color: C.gradientColor3),
+              ),
+              backgroundColor: C.fieldColor,
+            ));
+          }
+          if (state is HomeSuccess) {
+            print('fuck');
+            userProfile = state.userProfile;
+          }
+        }, builder: (context, state) {
+          return Stack(
+            children: [
+              // const ScreenBackground(),
+              if (state is HomeLoading)
+                _buildLoading(context)
+              else
+                _buildSuccess(context, width, height),
+            ],
+          );
+        }),
+      ),
     );
   }
 
   Widget _buildSuccess(BuildContext context, width, height) {
+    final LinearGradient _gradient = LinearGradient(colors: [
+      Colors.red,
+      Colors.yellow,
+      Colors.blue,
+      Colors.green,
+      Colors.grey[800]!,
+      Colors.deepPurple[200]!,
+      Colors.white,
+    ]);
+
     return AdvancedDrawer(
-      backdropColor: C.primaryColor,
+      backdropColor: Colors.black,
       controller: _advancedDrawerController,
       animationCurve: Curves.easeInOut,
       animationDuration: const Duration(milliseconds: 300),
@@ -98,8 +112,8 @@ class _HomeState extends State<Home> {
       ),
       drawer: SafeArea(
         child: ListTileTheme(
-          textColor: Color(0xff0E0207),
-          iconColor: Color(0xff0E0207),
+          textColor: Colors.white,
+          iconColor: Colors.white,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -126,9 +140,9 @@ class _HomeState extends State<Home> {
                   size: 30,
                 ),
                 title: Text(userProfile!.name,
-                    style: GoogleFonts.sen(
-                        fontSize: 20.0,
-                        color: C.vintageBackdrop4,
+                    style: GoogleFonts.lexend(
+                        fontSize: 18.0,
+                        // color: Colors.white,
                         fontWeight: FontWeight.bold)),
               ),
               ListTile(
@@ -138,9 +152,9 @@ class _HomeState extends State<Home> {
                   size: 30,
                 ),
                 title: Text(userProfile!.contactNumber,
-                    style: GoogleFonts.sen(
-                        fontSize: 20.0,
-                        color: C.vintageBackdrop4,
+                    style: GoogleFonts.lexend(
+                        fontSize: 18.0,
+                        // color: C.vintageBackdrop4,
                         fontWeight: FontWeight.bold)),
               ),
               ListTile(
@@ -150,15 +164,14 @@ class _HomeState extends State<Home> {
                   size: 30,
                 ),
                 title: Text(userProfile!.email,
-                    style: GoogleFonts.sen(
-                        fontSize: 20.0,
-                        color: C.vintageBackdrop4,
+                    style: GoogleFonts.lexend(
+                        fontSize: 17.0,
+                        // color: C.vintageBackdrop4,
                         fontWeight: FontWeight.bold)),
               ),
-              SizedBox(
-                height: 170,
-              ),
+              const SizedBox(height: 170),
               FormButton(
+                  isGradient: false,
                   title: 'Contact App Team',
                   fillColor: C.backgroundColor,
                   borderColor: C.buttonColor,
@@ -191,49 +204,57 @@ class _HomeState extends State<Home> {
           children: [
             Stack(
               children: [
+                SizedBox(
+                  width: width,
+                  height: height,
+                  child: Center(
+                    child: Image.asset(
+                      "asset/welcomeCarousel/background.png",
+                      height: height,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
                 Container(
-                    width: width,
-                    height: height,
-                    child: Center(child: Image.asset("${S.carousel}5.png"))),
-                Container(
-                    padding: const EdgeInsets.only(top: 200),
-                    width: width,
-                    height: height,
-                    child: ListView(
-                      padding: const EdgeInsets.all(8),
-                      children: <Widget>[
-                        MenuButton(
-                            onTap: () =>
-                                Navigator.pushNamed(context, S.routeEvents),
-                            width: width,
-                            tag: "Events",
-                            imgPath: S.events),
-                        MenuButton(
-                            onTap: () =>
-                                Navigator.pushNamed(context, S.routeSponsors),
-                            width: width,
-                            tag: "Sponsors",
-                            imgPath: S.sponsor),
-                        MenuButton(
-                            onTap: () =>
-                                Navigator.pushNamed(context, S.routeMadAds),
-                            width: width,
-                            tag: "Mad Ads",
-                            imgPath: "${S.carousel}5.png"),
-                        MenuButton(
-                            onTap: () =>
-                                Navigator.pushNamed(context, S.routeGallery),
-                            width: width,
-                            tag: "Gallery",
-                            imgPath: S.gallery),
-                        MenuButton(
-                            onTap: () =>
-                                Navigator.pushNamed(context, S.routeTeam),
-                            width: width,
-                            tag: "About Us",
-                            imgPath: S.team),
-                      ],
-                    )),
+                  padding: const EdgeInsets.only(top: 200),
+                  width: width,
+                  height: height,
+                  child: ListView(
+                    padding: const EdgeInsets.all(8),
+                    children: <Widget>[
+                      MenuButton(
+                          onTap: () =>
+                              Navigator.pushNamed(context, S.routeEvents),
+                          width: width,
+                          tag: "Events",
+                          imgPath: S.events),
+                      MenuButton(
+                          onTap: () =>
+                              Navigator.pushNamed(context, S.routeSponsors),
+                          width: width,
+                          tag: "Sponsors",
+                          imgPath: S.sponsor),
+                      MenuButton(
+                          onTap: () =>
+                              Navigator.pushNamed(context, S.routeMadAds),
+                          width: width,
+                          tag: "Mad Ads",
+                          imgPath: "asset/menu/mad_ads.jpg"),
+                      MenuButton(
+                          onTap: () =>
+                              Navigator.pushNamed(context, S.routeGallery),
+                          width: width,
+                          tag: "Gallery",
+                          imgPath: "asset/menu/gallery.jpg"),
+                      MenuButton(
+                          onTap: () =>
+                              Navigator.pushNamed(context, S.routeTeam),
+                          width: width,
+                          tag: "About Us",
+                          imgPath: "asset/menu/aboutUs.jpg"),
+                    ],
+                  ),
+                ),
                 Column(
                   children: [
                     Padding(
@@ -278,38 +299,56 @@ class _HomeState extends State<Home> {
                         theWidth: width,
                         theChild: Column(
                           children: [
-                            GradientText("ECLECTIKA",
-                                gradient: const LinearGradient(
-                                  colors: [
-                                    C.vintageBackdrop2,
-                                    Color(0xffCA965C),
-                                    Color(0xff876445),
-                                    Color(0xffCA965C),
-                                    Color(0xff876445),
-                                    Color(0xffCA965C),
-                                    Color(0xff876445),
-                                    C.vintageBackdrop2,
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                )),
-                            const SizedBox(
-                              height: 5.0,
-                            ),
-                            RichText(
-                              text: const TextSpan(
-                                text: "Let's start the ",
-                                style: TextStyle(
-                                    color: Color(0xffCA965C), fontSize: 24),
-                                children: <TextSpan>[
-                                  TextSpan(
-                                      text: 'Thunder',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: C.buttonColor)),
-                                ],
+                            ShaderMask(
+                              shaderCallback: (Rect rect) {
+                                return _gradient.createShader(rect);
+                              },
+                              child: Text(
+                                'ECLECTIKA',
+                                style: GoogleFonts.carterOne(
+                                    fontSize: 55, color: Colors.white),
                               ),
                             ),
+                            Text(
+                              'Unleash D Unstoppable',
+                              style: GoogleFonts.teko(
+                                fontSize: 25,
+                                color: Colors.white,
+                              ),
+                            ),
+                            // GradientText(
+                            //   "ECLECTIKA",
+                            //   gradient: LinearGradient(
+                            //     colors: [
+                            //       Colors.red,
+                            //       Colors.yellow,
+                            //       Colors.blue,
+                            //       Colors.green,
+                            //       Colors.grey[800]!,
+                            //       Colors.deepPurple[900]!,
+                            //       Colors.white,
+                            //     ],
+                            //     begin: Alignment.topLeft,
+                            //     end: Alignment.bottomRight,
+                            //   ),
+                            // ),
+                            // const SizedBox(
+                            //   height: 5.0,
+                            // ),
+                            // RichText(
+                            //   text: const TextSpan(
+                            //     text: "Unleash The ",
+                            //     style: TextStyle(
+                            //         color: Color(0xffCA965C), fontSize: 24),
+                            //     children: <TextSpan>[
+                            //       TextSpan(
+                            //           text: 'Unstoppable',
+                            //           style: TextStyle(
+                            //               fontWeight: FontWeight.bold,
+                            //               color: C.buttonColor)),
+                            //     ],
+                            //   ),
+                            // ),
                           ],
                         )),
                   ],

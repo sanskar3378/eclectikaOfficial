@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../../constants/colors.dart';
 
@@ -29,7 +30,6 @@ class ScreenBackground1 extends StatelessWidget {
   }
 }
 
-
 class ScreenBackground extends StatelessWidget {
   const ScreenBackground({super.key, this.elementId = ''});
   final String elementId;
@@ -37,7 +37,9 @@ class ScreenBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xff0E0207),
+      // color: Color(0xff0E0207),
+      child: Image.asset('asset/welcomeCarousel/background.png',
+          fit: BoxFit.cover, height: MediaQuery.of(context).size.height),
     );
   }
 }

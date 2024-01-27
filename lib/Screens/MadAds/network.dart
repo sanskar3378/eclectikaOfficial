@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 
 
 import '../../Modals/errors.dart';
-import '../../Modals/users.dart';
 
 class MadAdsNetwork{
 

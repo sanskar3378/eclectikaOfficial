@@ -1,7 +1,7 @@
 import 'package:eclectika23_official_app/Screens/events/events_main_screen.dart';
 import 'package:eclectika23_official_app/Screens/menupage_screens.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_zoom_drawer/config.dart';
+// import 'package:flutter_zoom_drawer/config.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
 class EventsScreen extends StatefulWidget {
@@ -27,7 +27,7 @@ class _EventsScreenState extends State<EventsScreen> {
         borderRadius: 24.0,
         angle: 0.0,
         showShadow: true,
-        slideWidth: MediaQuery.of(context).size.width *(0.65),
+        slideWidth: MediaQuery.of(context).size.width * (0.65),
       ),
     );
   }

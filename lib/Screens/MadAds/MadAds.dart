@@ -8,8 +8,6 @@ import 'package:video_player/video_player.dart';
 
 import '../../Constants/MadAdsLinks.dart';
 import '../../Constants/colors.dart';
-import '../../Constants/strings.dart';
-import '../../CustomWidgets/button.dart';
 import '../../CustomWidgets/customText.dart';
 
 class MadAdsScreen extends StatelessWidget {

@@ -9,7 +9,7 @@ class S {
   //images
   static const String carousel = "asset/welcomeCarousel/";
   static const String events = "asset/menu/events.png";
-  static const String sponsor = "asset/menu/sponsor.jpeg";
+  static const String sponsor = "asset/menu/sponsor.png";
   static const String face = "asset/menu/face.png";
   static const String schedule = "asset/menu/schedule.png";
   static const String team = "asset/menu/team.jpeg";
@@ -17,8 +17,8 @@ class S {
   static const String gallery = "asset/menu/dinosaur_taking_pictures.webp";
 
   static const List text1 = [
-    "Unleash your wild side at our Jurassic themed event.",
-    "Experience the thrill of the Jurassic at our upcoming event.",
+    "Get ready for an exhilarating experience at our superhero-themed event, where ordinary moments transform into extraordinary memories. Unleash your inner hero as we bring the vibrant world of comic books and blockbuster films to life. From thrilling cosplay showcases to interactive superhero challenges, immerse yourself in a day filled with action-packed fun for all ages. ",
+    "Join forces with fellow fans, meet iconic characters, and celebrate the spirit of heroism in a dynamic atmosphere that's perfect for families, friends, and superhero enthusiasts alike. Embrace the adventure, strike your best superhero pose, and make lasting memories at our unforgettable superhero-themed event!",
   ];
 
   //routes

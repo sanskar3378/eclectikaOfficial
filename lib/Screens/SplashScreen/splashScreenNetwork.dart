@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import '../../Constants/strings.dart';
 import '../../Modals/errors.dart';
 
 

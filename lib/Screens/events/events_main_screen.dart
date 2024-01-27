@@ -4,8 +4,6 @@ import 'package:eclectika23_official_app/Screens/events/mega_events.dart';
 import 'package:eclectika23_official_app/Screens/events/mini_event_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../../Constants/eventsList.dart';
-import '../../Modals/events.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -20,8 +18,6 @@ class EventMainScreen extends StatefulWidget {
 }
 
 class _EventMainScreenState extends State<EventMainScreen> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +25,9 @@ class _EventMainScreenState extends State<EventMainScreen> {
       appBar: AppBar(
         backgroundColor: Color(0xff000000),
         title: Padding(
-          padding: const EdgeInsets.only(left: 15,),
+          padding: const EdgeInsets.only(
+            left: 15,
+          ),
           child: GradientText("Events",
               gradient: const LinearGradient(
                 colors: [
@@ -58,24 +56,29 @@ class _EventMainScreenState extends State<EventMainScreen> {
           Expanded(
             child: Container(
               decoration: BoxDecoration(color: Color(0xff000000)),
-              child: Column(
-                children: [
-                  const SizedBox(height: 55,),
-                  FormButton(title: 'Mega Events',
-                      fillColor: C.backgroundColor,
-                      borderColor: C.buttonColor,
-                      onClick: (){
-                        Navigator.pushNamed(context, S.routeMegaEvents);
-                      }
-                  ),
-                  const SizedBox(height: 5,),
-                    FormButton(title: 'Mini Events',
-                              fillColor: C.backgroundColor,
-                              borderColor: C.buttonColor,
-                              onClick: (){
-                                Navigator.pushNamed(context, S.routeMiniEvents);
-                              }
-                    ),
+              child: Column(children: [
+                const SizedBox(
+                  height: 55,
+                ),
+                FormButton(
+                    isGradient: false,
+                    title: 'Mega Events',
+                    fillColor: C.backgroundColor,
+                    borderColor: C.buttonColor,
+                    onClick: () {
+                      Navigator.pushNamed(context, S.routeMegaEvents);
+                    }),
+                const SizedBox(
+                  height: 5,
+                ),
+                FormButton(
+                    isGradient: false,
+                    title: 'Mini Events',
+                    fillColor: C.backgroundColor,
+                    borderColor: C.buttonColor,
+                    onClick: () {
+                      Navigator.pushNamed(context, S.routeMiniEvents);
+                    }),
               ]),
             ),
           ),

@@ -14,7 +14,6 @@ import 'Screens/Home/network.dart';
 import 'Screens/SplashScreen/cubit/splashScreenCubit.dart';
 import 'Screens/SplashScreen/splashScreen.dart';
 import 'Screens/SplashScreen/splashScreenNetwork.dart';
-import 'Screens/events/events_main_screen.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,12 +33,11 @@ import 'Screens/Welcome/welcome.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
+    name: 'ECLECTIKA',
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(MyApp());
 }
-
-
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
@@ -48,7 +46,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return Provider(
-      create: (_)=> GlobalState(),
+      create: (_) => GlobalState(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'ECLECTIKA_23',
@@ -64,24 +62,20 @@ class MyApp extends StatelessWidget {
           S.routeGallery: (_) => const GalleryScreen(),
           S.routeMegaEvents: (_) => MegaEventScreen(),
           S.routeMiniEvents: (_) => MiniEventScreen(),
-          S.routeContactTeam:(_) => ContactAppScreen(),
+          S.routeContactTeam: (_) => ContactAppScreen(),
           S.routeHome: (_) => BlocProvider(
-              create: (_) => HomeCubit(HomeNetwork()),
-              child: Home()),
+              create: (_) => HomeCubit(HomeNetwork()), child: Home()),
           S.routeLogin: (_) => BlocProvider(
-              create: (_) => LoginCubit(FirebaseLogin()),
-              child: Login()),
+              create: (_) => LoginCubit(FirebaseLogin()), child: Login()),
           S.routeSignup: (_) => BlocProvider(
-              create: (_) => SignupCubit(FirebaseSignup()),
-              child: SignUp()),
+              create: (_) => SignupCubit(FirebaseSignup()), child: SignUp()),
         },
         initialRoute: S.routeSplash,
         theme: ThemeData(
             colorScheme: ColorScheme.fromSwatch().copyWith(
-              primary: C.gradientColor3,
-              secondary: C.buttonColor,
-            )
-        ),
+          primary: C.gradientColor3,
+          secondary: C.buttonColor,
+        )),
         home: Welcome(),
       ),
     );

@@ -11,15 +11,16 @@ class MenuPage extends StatelessWidget {
   const MenuPage({super.key});
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Stack(
         children: [
           Container(
             decoration: const BoxDecoration(
-                color: Color(0xff000000),
-              ),
+              color: Color(0xff000000),
             ),
+          ),
           SafeArea(
             child: Container(
               width: 200.0,
@@ -31,16 +32,16 @@ class MenuPage extends StatelessWidget {
                     children: const [
                       SizedBox(
                         child: AutoSizeText.rich(
-                        TextSpan(
-                          text: "Eclectika",
-                          style: TextStyle(
+                          TextSpan(
+                            text: "Eclectika",
+                            style: TextStyle(
                               fontSize: 40,
-                              fontWeight:FontWeight.bold,
+                              fontWeight: FontWeight.bold,
                               color: Color(0xffFFEBC1),
-                          ), // default text style
-                        ),
-                        minFontSize: 0,
-                        stepGranularity: 0.1,
+                            ), // default text style
+                          ),
+                          minFontSize: 0,
+                          stepGranularity: 0.1,
                         ),
                       ),
                       SizedBox(
@@ -92,7 +93,8 @@ class MenuPage extends StatelessWidget {
                       ),
                       const SizedBox(
                         height: 25.0,
-                      ), GestureDetector(
+                      ),
+                      GestureDetector(
                         onTap: () {
                           Navigator.pushReplacement(context,
                               MaterialPageRoute(builder: ((context) {
@@ -132,7 +134,8 @@ class MenuPage extends StatelessWidget {
                       ),
                       const SizedBox(
                         height: 25.0,
-                      ), GestureDetector(
+                      ),
+                      GestureDetector(
                         onTap: () {
                           Navigator.pushReplacement(context,
                               MaterialPageRoute(builder: ((context) {

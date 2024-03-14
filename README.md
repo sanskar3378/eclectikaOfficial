@@ -2,7 +2,7 @@
 
 ## Screenshots
 
-<img src="https://drive.google.com/drive/u/2/folders/1gyke20D8jPIBDwAYdprLqNtw5n_uCDGl">
+<img src="https://github.com/sanskar3378/eclectikaOfficial/blob/master/asset/1.png" alt="image1">
 
 
 

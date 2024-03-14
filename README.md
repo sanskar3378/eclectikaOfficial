@@ -2,7 +2,7 @@
 
 ## Screenshots
 
-![GitHub Logo](https://drive.google.com/file/d/1buzKyRNYIVklmC5TNKlduOZk0lRJLu1q/view?usp=drive_link)
+<img src="https://drive.google.com/drive/u/2/folders/1gyke20D8jPIBDwAYdprLqNtw5n_uCDGl">
 
 
 

@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,9 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../CustomWidgets/button.dart';
 import '../../CustomWidgets/frostedGlass.dart';
 import '../../CustomWidgets/loadingWidget.dart';
-import '../../CustomWidgets/screen_background.dart';
 import '../../CustomWidgets/textfield.dart';
-import '../../constants/colors.dart';
 import '../../constants/dimens.dart';
 import '../../constants/strings.dart';
 import 'cubit/signUpCubit.dart';
@@ -47,17 +44,17 @@ class SignUp extends StatelessWidget {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content: Text(
                   state.message,
-                  style: const TextStyle(color: C.gradientColor3),
+                  style: const TextStyle(color: Colors.black),
                 ),
-                backgroundColor: C.fieldColor,
+                backgroundColor: Colors.black,
               ));
             } else if (state is SignupSuccess) {
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                 content: Text(
                   "SignUp Successful",
-                  style: TextStyle(color: C.gradientColor3),
+                  style: TextStyle(color: Colors.black),
                 ),
-                backgroundColor: C.fieldColor,
+                backgroundColor: Colors.black,
               ));
               Navigator.pushReplacementNamed(context, S.routeLogin);
             }
@@ -180,6 +177,7 @@ class SignUp extends StatelessWidget {
                                     _signup(context);
                                   }),
                             ),
+                            const SizedBox(height: 10),
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: D.horizontalPadding),
@@ -233,17 +231,17 @@ class SignUp extends StatelessWidget {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text(
           "Confirm Password does not match Password",
-          style: TextStyle(color: C.gradientColor3),
+          style: TextStyle(color: Colors.black),
         ),
-        backgroundColor: C.fieldColor,
+        backgroundColor: Colors.black,
       ));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text(
           "Fill Form Cautiously!",
-          style: TextStyle(color: C.gradientColor3),
+          style: TextStyle(color: Colors.black),
         ),
-        backgroundColor: C.fieldColor,
+        backgroundColor: Colors.black,
       ));
     }
   }

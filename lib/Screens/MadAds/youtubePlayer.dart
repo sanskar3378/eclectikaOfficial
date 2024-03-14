@@ -1,10 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-
-import '../../Constants/colors.dart';
-import '../../CustomWidgets/customText.dart';
 
 class YoutubeMadAds extends StatefulWidget {
   String link;
@@ -15,7 +11,6 @@ class YoutubeMadAds extends StatefulWidget {
 }
 
 class _YoutubeMadAdsState extends State<YoutubeMadAds> {
-
   String link;
   _YoutubeMadAdsState({required this.link});
   late YoutubePlayerController Control;
@@ -34,40 +29,45 @@ class _YoutubeMadAdsState extends State<YoutubeMadAds> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: Padding(
-          padding: const EdgeInsets.only(left: 15,),
-          child: GradientText("Mad Ads",
-              gradient: const LinearGradient(
-                colors: [
-                  C.vintageBackdrop2,
-                  Color(0xffCA965C),
-                  Color(0xff876445),
-                  Color(0xffCA965C),
-                  Color(0xff876445),
-                  Color(0xffCA965C),
-                  Color(0xff876445),
-                  C.vintageBackdrop2,
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
+    return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage('asset/welcomeCarousel/background.png'),
+            fit: BoxFit.cover),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          iconTheme: const IconThemeData(
+            color: Colors.white,
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.transparent,
+          title: Text(
+            'Mad Ads',
+            style: GoogleFonts.carterOne(
+              color: Colors.white,
+              fontSize: 40,
+            ),
           ),
         ),
-      ),
-      backgroundColor: C.vintageBackdrop4,
-      body: SafeArea(
-        child: YoutubePlayerBuilder(player: YoutubePlayer(
-          controller: Control,
-        ),
-          builder: (context,player)=>Center(
-            child: player,
+        // backgroundColor: C.vintageBackdrop4,
+        body: SafeArea(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: YoutubePlayerBuilder(
+                player: YoutubePlayer(
+                  controller: Control,
+                ),
+                builder: (context, player) => Center(
+                  child: player,
+                ),
+              ),
+            ),
           ),
         ),
       ),
     );
   }
-
 }

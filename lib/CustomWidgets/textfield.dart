@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../constants/colors.dart';
 import '../constants/dimens.dart';
 
 class CustomField extends StatelessWidget {
@@ -70,7 +69,7 @@ class CustomField1 extends CustomField {
   Widget build(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
-          color: C.backgroundColor,
+          // color: C.backgroundColor,
           borderRadius: BorderRadius.circular(15),
         ),
         height: 50,
@@ -112,7 +111,7 @@ class PhoneField extends CustomField {
             vertical: D.verticalPadding * 0.5),
         child: Container(
             decoration: BoxDecoration(
-                color: C.backgroundColor,
+                // color: C.backgroundColor,
                 borderRadius: BorderRadius.circular(15)),
             height: 50,
             child: Padding(
@@ -135,7 +134,7 @@ class PhoneField extends CustomField {
                   prefixIcon: Icon(
                     icon,
                     size: D.iconSize,
-                    color: C.buttonColor,
+                    // color: C.buttonColor,
                   ),
                   hintText: label,
                 ),

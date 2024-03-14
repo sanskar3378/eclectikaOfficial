@@ -1,61 +1,82 @@
-import 'package:eclectika23_official_app/CustomWidgets/button.dart';
-import 'package:eclectika23_official_app/CustomWidgets/customText.dart';
-import 'package:eclectika23_official_app/Screens/events/mega_events.dart';
-import 'package:eclectika23_official_app/Screens/events/mini_event_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../Constants/colors.dart';
+import '../../CustomWidgets/button.dart';
 import '../../Constants/strings.dart';
 
 class EventMainScreen extends StatefulWidget {
-  const EventMainScreen({Key? key}) : super(key: key);
+  const EventMainScreen({super.key});
 
   @override
   _EventMainScreenState createState() => _EventMainScreenState();
 }
 
 class _EventMainScreenState extends State<EventMainScreen> {
+  final LinearGradient _gradient = LinearGradient(colors: [
+    Colors.red,
+    Colors.yellow,
+    Colors.blue,
+    Colors.green,
+    Colors.grey[800]!,
+    Colors.deepPurple[200]!,
+    Colors.white,
+  ]);
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xff000000),
-      appBar: AppBar(
-        backgroundColor: Color(0xff000000),
-        title: Padding(
-          padding: const EdgeInsets.only(
-            left: 15,
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Color.fromARGB(255, 136, 42, 30),
+            Color.fromARGB(255, 145, 48, 37),
+            Color.fromARGB(255, 157, 61, 47),
+            Color.fromARGB(255, 182, 88, 76),
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          title: Padding(
+            padding: const EdgeInsets.only(
+              left: 15,
+            ),
+            child: ShaderMask(
+              shaderCallback: (Rect rect) {
+                return _gradient.createShader(rect);
+              },
+              child: Text(
+                'ECLECTIKA',
+                style: GoogleFonts.carterOne(fontSize: 45, color: Colors.white),
+              ),
+            ),
           ),
-          child: GradientText("Events",
-              gradient: const LinearGradient(
-                colors: [
-                  C.vintageBackdrop2,
-                  Color(0xffCA965C),
-                  Color(0xff876445),
-                  Color(0xffCA965C),
-                  Color(0xff876445),
-                  Color(0xffCA965C),
-                  Color(0xff876445),
-                  C.vintageBackdrop2,
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+          leading: IconButton(
+              onPressed: () => ZoomDrawer.of(context)!.toggle(),
+              icon: const Icon(
+                Icons.menu,
+                color: Colors.white,
               )),
         ),
-        leading: IconButton(
-            onPressed: () => ZoomDrawer.of(context)!.toggle(),
-            icon: Icon(Icons.menu)),
-      ),
-      body: Column(
-        children: [
-          Container(
-            child: Image.asset("asset/welcomeCarousel/5.png"),
-          ),
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(color: Color(0xff000000)),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(5),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(90),
+                child: Image.asset(
+                  "asset/menu/megaEvent.jpeg",
+                  // fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            Expanded(
               child: Column(children: [
                 const SizedBox(
                   height: 55,
@@ -63,26 +84,26 @@ class _EventMainScreenState extends State<EventMainScreen> {
                 FormButton(
                     isGradient: false,
                     title: 'Mega Events',
-                    fillColor: C.backgroundColor,
-                    borderColor: C.buttonColor,
+                    fillColor: Colors.blue[900]!,
+                    borderColor: Colors.white,
                     onClick: () {
                       Navigator.pushNamed(context, S.routeMegaEvents);
                     }),
                 const SizedBox(
-                  height: 5,
+                  height: 15,
                 ),
                 FormButton(
                     isGradient: false,
                     title: 'Mini Events',
-                    fillColor: C.backgroundColor,
-                    borderColor: C.buttonColor,
+                    fillColor: Colors.green[800]!,
+                    borderColor: Colors.white,
                     onClick: () {
                       Navigator.pushNamed(context, S.routeMiniEvents);
                     }),
               ]),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

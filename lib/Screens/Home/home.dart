@@ -1,24 +1,22 @@
+import 'package:awesome_icons/awesome_icons.dart';
 import 'package:eclectika23_official_app/CustomWidgets/button.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:eclectika23_official_app/CustomWidgets/frostedGlass.dart';
-import 'package:eclectika23_official_app/Screens/events/events_main_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:video_player/video_player.dart';
 import '../../Constants/strings.dart';
-import '../../CustomWidgets/customText.dart';
 import '../../CustomWidgets/loadingWidget.dart';
-import '../../CustomWidgets/screen_background.dart';
 import '../../Modals/users.dart';
 import '../../constants/colors.dart';
 
 import 'cubit/homeCubit.dart';
 
 class Home extends StatefulWidget {
-  Home({Key? key}) : super(key: key);
+  const Home({super.key});
 
   @override
   State<Home> createState() => _HomeState();
@@ -26,65 +24,45 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final _advancedDrawerController = AdvancedDrawerController();
-  late VideoPlayerController _controller;
   UserProfile? userProfile;
 
   @override
   void initState() {
     _getProfile(context);
     super.initState();
-    _controller = VideoPlayerController.asset('asset/videos/intro.mp4');
-
-    _controller.addListener(() {
-      setState(() {});
-    });
-    _controller.setLooping(true);
-    _controller.setVolume(0);
-    _controller.initialize().then((_) => setState(() {}));
-    _controller.play();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-    return Container(
-      color: Colors.transparent,
-      child: Scaffold(
-        backgroundColor: Colors.indigo,
-        body: BlocConsumer<HomeCubit, HomeState>(listener: (context, state) {
-          if (state is HomeError) {
-            print('oh no');
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(
-                state.message,
-                style: const TextStyle(color: C.gradientColor3),
-              ),
-              backgroundColor: C.fieldColor,
-            ));
-          }
-          if (state is HomeSuccess) {
-            print('fuck');
-            userProfile = state.userProfile;
-          }
-        }, builder: (context, state) {
-          return Stack(
-            children: [
-              // const ScreenBackground(),
-              if (state is HomeLoading)
-                _buildLoading(context)
-              else
-                _buildSuccess(context, width, height),
-            ],
-          );
-        }),
-      ),
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: BlocConsumer<HomeCubit, HomeState>(listener: (context, state) {
+        if (state is HomeError) {
+          print('oh no');
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(
+              state.message,
+              style: const TextStyle(color: C.gradientColor3),
+            ),
+            backgroundColor: C.fieldColor,
+          ));
+        }
+        if (state is HomeSuccess) {
+          print('fuck');
+          userProfile = state.userProfile;
+        }
+      }, builder: (context, state) {
+        return Stack(
+          children: [
+            if (state is HomeLoading)
+              _buildLoading(context)
+            else
+              _buildSuccess(context, width, height),
+          ],
+        );
+      }),
     );
   }
 
@@ -99,8 +77,27 @@ class _HomeState extends State<Home> {
       Colors.white,
     ]);
 
+    final Uri linkedIn =
+        Uri.parse('https://www.linkedin.com/company/eclectika-nitrr/');
+    final Uri insta = Uri.parse('https://www.instagram.com/eclectika_nitrr/');
+    final Uri twitter = Uri.parse('https://x.com/eclectika_nitrr?s=20');
+
+    Future<void> _launchURL(String url) async {
+      final Uri uri = Uri(scheme: "https", host: url);
+      if (!await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      )) {
+        throw "cannot launch url";
+      }
+    }
+
     return AdvancedDrawer(
-      backdropColor: Colors.black,
+      backdrop: Image.asset(
+        'asset/menu/drawerBackground.png',
+        fit: BoxFit.cover,
+        height: double.infinity,
+      ),
       controller: _advancedDrawerController,
       animationCurve: Curves.easeInOut,
       animationDuration: const Duration(milliseconds: 300),
@@ -112,8 +109,8 @@ class _HomeState extends State<Home> {
       ),
       drawer: SafeArea(
         child: ListTileTheme(
-          textColor: Colors.white,
-          iconColor: Colors.white,
+          textColor: Colors.black,
+          iconColor: Colors.black,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -125,12 +122,17 @@ class _HomeState extends State<Home> {
                   bottom: 64.0,
                 ),
                 clipBehavior: Clip.antiAlias,
-                decoration: const BoxDecoration(
-                  color: Colors.black26,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 158, 197, 171),
                   shape: BoxShape.circle,
+                  border: Border.all(color: Colors.black, width: 3),
                 ),
-                child: Image.asset(
-                  S.profile,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(80),
+                  child: Image.asset(
+                    S.profile,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               ListTile(
@@ -141,9 +143,7 @@ class _HomeState extends State<Home> {
                 ),
                 title: Text(userProfile!.name,
                     style: GoogleFonts.lexend(
-                        fontSize: 18.0,
-                        // color: Colors.white,
-                        fontWeight: FontWeight.bold)),
+                        fontSize: 18.0, fontWeight: FontWeight.bold)),
               ),
               ListTile(
                 onTap: () {},
@@ -151,11 +151,13 @@ class _HomeState extends State<Home> {
                   Icons.phone,
                   size: 30,
                 ),
-                title: Text(userProfile!.contactNumber,
-                    style: GoogleFonts.lexend(
-                        fontSize: 18.0,
-                        // color: C.vintageBackdrop4,
-                        fontWeight: FontWeight.bold)),
+                title: Text(
+                  userProfile!.contactNumber,
+                  style: GoogleFonts.lexend(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
               ListTile(
                 onTap: () {},
@@ -165,30 +167,55 @@ class _HomeState extends State<Home> {
                 ),
                 title: Text(userProfile!.email,
                     style: GoogleFonts.lexend(
-                        fontSize: 17.0,
-                        // color: C.vintageBackdrop4,
-                        fontWeight: FontWeight.bold)),
+                        fontSize: 17.0, fontWeight: FontWeight.bold)),
               ),
-              const SizedBox(height: 170),
-              FormButton(
-                  isGradient: false,
-                  title: 'Contact App Team',
-                  fillColor: C.backgroundColor,
-                  borderColor: C.buttonColor,
-                  onClick: () {
-                    Navigator.pushNamed(context, S.routeContactTeam);
-                  }),
+              // const SizedBox(height: 280),
               const Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      launchUrl(insta);
+                    },
+                    icon: const Icon(
+                      FontAwesomeIcons.instagram,
+                      size: 40,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  IconButton(
+                    onPressed: () {
+                      launchUrl(linkedIn);
+                    },
+                    icon: const Icon(
+                      FontAwesomeIcons.linkedinIn,
+                      size: 32,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  GestureDetector(
+                    child: Image.asset('asset/logo/x-twitter.png', height: 28),
+                    onTap: () {
+                      launchUrl(twitter);
+                    },
+                  ),
+                ],
+              ),
+              // const Spacer(),
               DefaultTextStyle(
                 style: const TextStyle(
                   fontSize: 12,
-                  color: Colors.white54,
+                  color: Colors.black,
                 ),
                 child: Container(
                   margin: const EdgeInsets.symmetric(
                     vertical: 16.0,
                   ),
-                  child: const Text('Terms of Service | Privacy Policy'),
+                  child: Text(
+                    'Terms of Service | Privacy Policy',
+                    style: GoogleFonts.lexend(fontSize: 15),
+                  ),
                 ),
               ),
             ],
@@ -234,12 +261,12 @@ class _HomeState extends State<Home> {
                           width: width,
                           tag: "Sponsors",
                           imgPath: S.sponsor),
-                      MenuButton(
-                          onTap: () =>
-                              Navigator.pushNamed(context, S.routeMadAds),
-                          width: width,
-                          tag: "Mad Ads",
-                          imgPath: "asset/menu/mad_ads.jpg"),
+                      // MenuButton(
+                      //     onTap: () =>
+                      //         Navigator.pushNamed(context, S.routeMadAds),
+                      //     width: width,
+                      //     tag: "Mad Ads",
+                      //     imgPath: "asset/menu/mad_ads.jpg"),
                       MenuButton(
                           onTap: () =>
                               Navigator.pushNamed(context, S.routeGallery),
@@ -250,7 +277,7 @@ class _HomeState extends State<Home> {
                           onTap: () =>
                               Navigator.pushNamed(context, S.routeTeam),
                           width: width,
-                          tag: "About Us",
+                          tag: "Our Team",
                           imgPath: "asset/menu/aboutUs.jpg"),
                     ],
                   ),
@@ -258,7 +285,7 @@ class _HomeState extends State<Home> {
                 Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 25.0),
+                      padding: const EdgeInsets.only(top: 30.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -283,11 +310,12 @@ class _HomeState extends State<Home> {
                             onPressed: () async {
                               await FirebaseAuth.instance.signOut();
                               print(FirebaseAuth.instance.currentUser);
+                              // ignore: use_build_context_synchronously
                               Navigator.pushReplacementNamed(
                                   context, S.routeSplash);
                             },
                             icon: const Icon(
-                              Icons.logout,
+                              Icons.logout_rounded,
                               color: C.vintageBackdrop1,
                               size: 30.0,
                             ),

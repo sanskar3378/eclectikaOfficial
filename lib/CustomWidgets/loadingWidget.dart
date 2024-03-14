@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:loading_indicator/loading_indicator.dart';
 import 'package:lottie/lottie.dart';
 
-import '../Constants/strings.dart';
-
 class LoadingScreen extends StatelessWidget {
-  const LoadingScreen({Key? key}) : super(key: key);
+  const LoadingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +16,7 @@ class LoadingScreen extends StatelessWidget {
             // Image.asset("${S.carousel}5.png"),
 
             Text(
-              'ECLECTIKA\'23',
+              'ECLECTIKA\'24',
               style: GoogleFonts.titanOne(fontSize: 40, color: Colors.yellow),
             ),
             const SizedBox(height: 20),

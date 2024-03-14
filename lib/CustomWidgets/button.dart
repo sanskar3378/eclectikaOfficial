@@ -1,11 +1,7 @@
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../Constants/dimens.dart';
-import '../constants/colors.dart';
 
 class CustomButton extends StatelessWidget {
   String title;
@@ -25,7 +21,7 @@ class CustomButton extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return InkWell(
-      splashColor: C.gradientColor,
+      // splashColor: C.gradientColor,
       onTap: onClick,
       child: Container(
         margin: EdgeInsets.all(width * 0.01),
@@ -74,10 +70,14 @@ class FormButton extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return InkWell(
+      borderRadius: BorderRadius.circular(20),
       onTap: onClick,
       splashColor: Colors.white,
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: width * 0.045, vertical: 10),
+        // margin: const EdgeInsets.symmetric(
+        //   // horizontal: width * 0.045,
+        //   vertical: 10,
+        // ),
         decoration: BoxDecoration(
             gradient: isGradient
                 ? LinearGradient(
@@ -134,7 +134,7 @@ class FormButton1 extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
     return InkWell(
       onTap: onClick,
-      splashColor: C.gradientColor,
+      // splashColor: C.gradientColor,
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: width * 0.045, vertical: 10),
         decoration: BoxDecoration(
@@ -178,54 +178,65 @@ class MenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(10.0),
-      height: 140,
-      width: width * 0.8,
-      child: Stack(
-        alignment: Alignment.centerLeft,
-        children: [
-          Container(
-            width: width,
-            padding: const EdgeInsets.all(10.0),
-            decoration: BoxDecoration(
-                color: C.primaryColor,
-                borderRadius: BorderRadius.circular(10.0)),
-            height: 100,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(width: 100),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      tag,
-                      style: GoogleFonts.sen(
-                          fontSize: 30.0,
-                          color: C.vintageBackdrop4,
-                          fontWeight: FontWeight.bold),
-                    ),
+    return InkWell(
+      onTap: onTap,
+      // onLongPress: () {},
+      splashColor: Colors.white,
+      child: Ink(
+        child: Container(
+          margin: const EdgeInsets.all(10.0),
+          height: 140,
+          width: width * 0.8,
+          child: Stack(
+            alignment: Alignment.centerLeft,
+            children: [
+              Container(
+                width: width,
+                padding: const EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  color: Colors.lightBlue,
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                height: 125,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(width: 100),
+                      Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          tag,
+                          style: GoogleFonts.sen(
+                              fontSize: 30.0,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: GestureDetector(
+                          // onTap: onTap,
+                          child: const Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: GestureDetector(
-                      onTap: onTap,
-                      child: const Icon(Icons.arrow_forward_ios_rounded),
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: Image.asset(imgPath),
+              ),
+            ],
           ),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10.0),
-            child: Image.asset(imgPath),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -254,7 +265,7 @@ class ProfileButton extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
     return InkWell(
       onTap: onClick,
-      splashColor: C.gradientColor,
+      splashColor: Colors.white,
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: width * 0.045, vertical: 10),
         decoration: BoxDecoration(

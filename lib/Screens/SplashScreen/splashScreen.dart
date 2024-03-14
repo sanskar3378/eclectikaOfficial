@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../Constants/strings.dart';
 import '../../CustomWidgets/loadingWidget.dart';
-import '../../CustomWidgets/screen_background.dart';
 import 'cubit/splashScreenCubit.dart';
 
 class SplashScreen extends StatefulWidget {

@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 
-class ShowDialog{
-
+class ShowDialog {
   Future<void> _showMyDialog(BuildContext context) async {
     return showDialog<void>(
       context: context,
@@ -10,9 +8,9 @@ class ShowDialog{
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('AlertDialog Title'),
-          content: SingleChildScrollView(
+          content: const SingleChildScrollView(
             child: ListBody(
-              children: const <Widget>[
+              children: <Widget>[
                 Text('This is a demo alert dialog.'),
               ],
             ),
@@ -30,4 +28,3 @@ class ShowDialog{
     );
   }
 }
-

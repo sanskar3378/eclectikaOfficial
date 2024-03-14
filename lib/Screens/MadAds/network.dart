@@ -1,28 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/widgets.dart';
-
 
 import '../../Modals/errors.dart';
 
-class MadAdsNetwork{
-
-  Future<List<String>> getVideoLinks() async{
-    final docRef = FirebaseFirestore.instance.collection("MadAdsLinks").doc("videoLinks");
+class MadAdsNetwork {
+  Future<List<String>> getVideoLinks() async {
+    final docRef =
+        FirebaseFirestore.instance.collection("MadAdsLinks").doc("videoLinks");
     List<String> videoLinks = [];
     return await docRef.get().then(
-          (DocumentSnapshot doc) {
+      (DocumentSnapshot doc) {
         final data = doc.data() as Map<String, String>;
         print(data);
-        data.forEach((k,v) => videoLinks.add(v));
+        data.forEach((k, v) => videoLinks.add(v));
         return videoLinks;
       },
-      onError: (e){
+      onError: (e) {
         print("Error getting document: $e");
         throw CustomException(e.toString());
       },
     );
   }
-
-
 }

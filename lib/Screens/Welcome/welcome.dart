@@ -1,11 +1,10 @@
-import 'package:eclectika23_official_app/CustomWidgets/screen_background.dart';
-import 'package:eclectika23_official_app/Screens/Welcome/network.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../Screens/Welcome/network.dart';
+import '../../CustomWidgets/screen_background.dart';
 import '../../CustomWidgets/button.dart';
 import '../../CustomWidgets/customBanner.dart';
-import '../../constants/colors.dart';
 import '../../constants/strings.dart';
 
 class Welcome extends StatelessWidget {

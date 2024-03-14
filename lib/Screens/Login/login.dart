@@ -8,7 +8,6 @@ import '../../CustomWidgets/frostedGlass.dart';
 import '../../CustomWidgets/loadingWidget.dart';
 import '../../CustomWidgets/screen_background.dart';
 import '../../CustomWidgets/textfield.dart';
-import '../../constants/colors.dart';
 import '../../constants/dimens.dart';
 import '../../constants/strings.dart';
 import 'cubit/loginCubit.dart';
@@ -40,17 +39,17 @@ class Login extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(
                 state.message,
-                style: const TextStyle(color: C.gradientColor3),
+                style: const TextStyle(color: Colors.black),
               ),
-              backgroundColor: C.fieldColor,
+              backgroundColor: Colors.black,
             ));
           } else if (state is LoginSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               content: Text(
                 "Login Successful",
-                style: TextStyle(color: C.gradientColor3),
+                style: TextStyle(color: Colors.black),
               ),
-              backgroundColor: C.fieldColor,
+              backgroundColor: Colors.black,
             ));
             Navigator.pushReplacementNamed(context, S.routeSplash);
           }
@@ -83,9 +82,9 @@ class Login extends StatelessWidget {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text(
           "Fill Form Cautiously",
-          style: TextStyle(color: C.gradientColor3),
+          style: TextStyle(color: Colors.black),
         ),
-        backgroundColor: C.fieldColor,
+        backgroundColor: Colors.black,
       ));
     }
   }
@@ -149,12 +148,13 @@ class Login extends StatelessWidget {
                         child: FormButton(
                             isGradient: false,
                             title: 'Log in',
-                            fillColor: C.backgroundColor,
-                            borderColor: C.gradientColor3,
+                            fillColor: Colors.black,
+                            borderColor: Colors.white,
                             onClick: () {
                               _login(context);
                             }),
                       ),
+                      const SizedBox(height: 10),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: D.horizontalPadding),

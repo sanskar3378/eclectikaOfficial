@@ -1,12 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
 class FrostedGlassBox extends StatelessWidget {
   const FrostedGlassBox(
-      {Key? key,
-        required this.theWidth,
-        required this.theChild})
+      {Key? key, required this.theWidth, required this.theChild})
       : super(key: key);
 
   final theWidth;
@@ -62,10 +59,7 @@ class FrostedGlassBox extends StatelessWidget {
 
 class FrostedGlassBox1 extends StatelessWidget {
   const FrostedGlassBox1(
-      {Key? key,
-        required this.theWidth,
-        required this.theChild})
-      : super(key: key);
+      {super.key, required this.theWidth, required this.theChild});
 
   final theWidth;
   final theChild;
@@ -74,7 +68,7 @@ class FrostedGlassBox1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       child: Container(
-        padding: EdgeInsets.symmetric(vertical:2, horizontal: 5),
+        padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
         width: theWidth,
         color: Colors.transparent,
         //we use Stack(); because we want the effects be on top of each other,
@@ -108,7 +102,9 @@ class FrostedGlassBox1 extends StatelessWidget {
               ),
             ),
             //child ==> the first/top layer of stack
-            Center(child: theChild,)
+            Center(
+              child: theChild,
+            )
           ],
         ),
       ),
